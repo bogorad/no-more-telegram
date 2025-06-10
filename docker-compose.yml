@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  telegram-daemon:
+    build: .
+    container_name: telegram-daemon
+    restart: unless-stopped
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./session.json:/app/session.json
+      - ./logs:/app/logs
+    environment:
+      # Alternative to config file - uncomment and set these
+      # APP_ID: "your_app_id"
+      # APP_HASH: "your_app_hash"
+      # PHONE: "+1234567890"
+      # PASSWORD: "your_2fa_password"
+      # RESPONSE_MSG: "I'm no longer using Telegram. Contact me via email."
+      # LOG_LEVEL: "info"
+      # LOG_FILE: "/app/logs/telegram-daemon.log"
+    networks:
+      - telegram-net
+
+networks:
+  telegram-net:
+    driver: bridge
+

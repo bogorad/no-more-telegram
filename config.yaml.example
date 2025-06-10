@@ -1,0 +1,26 @@
+# Telegram Daemon Configuration
+# Copy this file to config.yaml and modify as needed
+
+# Telegram API credentials (required)
+# Get these from https://my.telegram.org/apps
+app_id: 0  # Your app ID
+app_hash: ""  # Your app hash
+
+# Authentication (required)
+phone: ""  # Your phone number in international format (e.g., +1234567890)
+password: ""  # Your 2FA password (leave empty if 2FA is not enabled)
+
+# Session storage
+session_file: "session.json"  # Path to session file
+
+# Response configuration
+response_message: "Hi! I'm no longer using Telegram. Please contact me via email or other means."
+response_timeout_hours: 24  # Hours to wait before responding to the same contact again
+
+# Logging
+log_level: "info"  # debug, info, warn, error
+log_file: ""  # Leave empty to log to stdout, or specify a file path
+
+# Daemon settings
+enable_daemon_mode: false  # Run as a background daemon (Linux only)
+

@@ -1,0 +1,26 @@
+[Unit]
+Description=Telegram Auto-Response Daemon
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=telegram-daemon
+Group=telegram-daemon
+WorkingDirectory=/opt/telegram-daemon
+ExecStart=/opt/telegram-daemon/telegram-daemon
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables (alternative to config file)
+# Environment=APP_ID=your_app_id
+# Environment=APP_HASH=your_app_hash
+# Environment=PHONE=+1234567890
+# Environment=PASSWORD=your_2fa_password
+# Environment=RESPONSE_MSG="I'm no longer using Telegram. Contact me via email."
+
+[Install]
+WantedBy=multi-user.target
+
