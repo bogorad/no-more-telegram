@@ -7,6 +7,7 @@ This comprehensive deployment guide provides detailed instructions for deploying
 ## Build Status
 
 The daemon has been successfully compiled with the following configuration:
+
 - Go version: 1.21+ (automatically upgraded to 1.23 for compatibility)
 - gotd library: v0.100.0 (compatible version)
 - Dependencies: All required dependencies resolved and tested
@@ -23,6 +24,7 @@ git clone <repository-url>
 cd telegram-daemon
 
 # Build the binary
+go mod tidy
 go build -o telegram-daemon
 
 # Create configuration
@@ -31,7 +33,7 @@ nano config.yaml
 
 # Set required values:
 # - app_id: Your Telegram app ID
-# - app_hash: Your Telegram app hash  
+# - app_hash: Your Telegram app hash
 # - phone: Your phone number (+1234567890)
 # - password: Your 2FA password (if enabled)
 
@@ -148,6 +150,7 @@ export LOG_FILE="/var/log/telegram-daemon.log"
 ### For VPS Deployment:
 
 1. **Interactive Setup**: Run the daemon interactively once to complete authentication:
+
    ```bash
    ./telegram-daemon
    # Enter the verification code when prompted
@@ -164,6 +167,7 @@ export LOG_FILE="/var/log/telegram-daemon.log"
 ### For Docker Deployment:
 
 1. **Initial Run**: Start container interactively:
+
    ```bash
    docker run -it --rm \
      -v $(pwd)/config.yaml:/app/config.yaml:ro \
@@ -181,6 +185,7 @@ export LOG_FILE="/var/log/telegram-daemon.log"
 ### Configuration File Priority
 
 The daemon uses the following configuration priority (highest to lowest):
+
 1. Environment variables
 2. Configuration file (`config.yaml`)
 3. Default values
@@ -188,21 +193,22 @@ The daemon uses the following configuration priority (highest to lowest):
 ### Required Configuration
 
 Minimum required configuration:
+
 ```yaml
-app_id: 123456  # From https://my.telegram.org/apps
-app_hash: "your_app_hash"  # From https://my.telegram.org/apps
-phone: "+1234567890"  # Your phone number
+app_id: 123456 # From https://my.telegram.org/apps
+app_hash: "your_app_hash" # From https://my.telegram.org/apps
+phone: "+1234567890" # Your phone number
 ```
 
 ### Optional Configuration
 
 ```yaml
-password: ""  # 2FA password (if enabled)
-session_file: "session.json"  # Session storage location
-response_message: "Custom message"  # Auto-response text
-response_timeout_hours: 24  # Rate limiting
-log_level: "info"  # Logging verbosity
-log_file: ""  # Log file path (empty = stdout)
+password: "" # 2FA password (if enabled)
+session_file: "session.json" # Session storage location
+response_message: "Custom message" # Auto-response text
+response_timeout_hours: 24 # Rate limiting
+log_level: "info" # Logging verbosity
+log_file: "" # Log file path (empty = stdout)
 ```
 
 ## Security Considerations
@@ -264,11 +270,13 @@ docker ps | grep telegram-daemon
 #### Common Issues
 
 1. **Authentication Failed**
+
    - Verify `APP_ID`, `APP_HASH`, and phone number
    - Check if 2FA password is required
    - Ensure session file permissions are correct
 
 2. **Connection Issues**
+
    - Verify internet connectivity
    - Check firewall settings for outbound HTTPS
    - Confirm Telegram servers are accessible
@@ -281,6 +289,7 @@ docker ps | grep telegram-daemon
 #### Debug Mode
 
 Enable detailed logging:
+
 ```bash
 export LOG_LEVEL=debug
 ./telegram-daemon
@@ -389,4 +398,3 @@ sudo systemctl restart telegram-daemon
 ```
 
 This deployment guide provides comprehensive instructions for deploying the Telegram daemon in various environments. The daemon has been successfully tested and is ready for production deployment with proper configuration and security measures.
-
